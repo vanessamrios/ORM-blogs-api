@@ -5,7 +5,7 @@ const Attributes = {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
-        autoIncement: true,
+        autoIncrement: true,
       },
       title: {
         type: DataTypes.STRING,
@@ -33,10 +33,10 @@ const Attributes = {
 
 module.exports = (sequelize) => {
     const BlogPost = sequelize.define(
-        'BlogPosts',
+        'BlogPost',
         Attributes,
         {
-            timestamps: true,
+            timestamps: false,
             tableName: 'BlogPosts',
         },
     );
