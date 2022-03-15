@@ -13,6 +13,13 @@ const create = async (req, res) => {
   return res.status(201).json({ token });
 };
 
+const findAll = async (req, res) => {
+  const usersList = await User.findAll();
+
+  return res.status(200).json(usersList);
+};
+
 module.exports = {
   create,
+  findAll,
 };

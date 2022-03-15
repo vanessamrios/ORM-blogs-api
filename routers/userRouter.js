@@ -1,9 +1,9 @@
 const express = require('express');
-const { create } = require('../controllers/userColntroller');
+const { create, findAll } = require('../controllers/userColntroller');
 const { validateDisplayName, 
     validateEmail, validatePassword } = require('../middlewares/userMiddlewares');
 
-// const authMiddleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
@@ -15,11 +15,11 @@ router.post(
   create,
 );
 
-// router.get(
-//   '/',
-// //   authMiddleware,
-// //   findAll,
-// );
+router.get(
+  '/',
+  authMiddleware,
+  findAll,
+);
 
 // router.put(
 //   '/',
