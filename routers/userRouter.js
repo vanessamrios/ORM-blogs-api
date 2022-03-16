@@ -1,5 +1,5 @@
 const express = require('express');
-const { create, findAll } = require('../controllers/userColntroller');
+const { create, findAll, findByPk } = require('../controllers/userColntroller');
 const { validateDisplayName, 
     validateEmail, validatePassword } = require('../middlewares/userMiddlewares');
 
@@ -19,6 +19,12 @@ router.get(
   '/',
   authMiddleware,
   findAll,
+);
+
+router.get(
+  '/:id',
+  authMiddleware,
+  findByPk,
 );
 
 // router.put(
