@@ -19,16 +19,4 @@ router.get(
   findAll,
 );
 
-// router.get(
-//   '/:id',
-//   authMiddleware,
-//   findByPk,
-// );
-
-// router.put(
-//   '/',
-//   auth,
-//   update,
-// );
-
 module.exports = router;
