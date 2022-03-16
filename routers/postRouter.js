@@ -1,5 +1,5 @@
 const express = require('express');
-const { create } = require('../controllers/blogPostController');
+const { create, findAll } = require('../controllers/blogPostController');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const { validateTitle, 
@@ -16,10 +16,10 @@ router.post(
   create,
 );
 
-// router.get(
-//   '/',
-//   authMiddleware,
-//   findAll,
-// );
+router.get(
+  '/',
+  authMiddleware,
+  findAll,
+);
 
 module.exports = router;

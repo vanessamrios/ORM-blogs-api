@@ -1,5 +1,5 @@
 const sequelize = require('sequelize');
-const { BlogPost, Category } = require('../models');
+const { User, BlogPost, Category } = require('../models');
 
 const create = async (req, res) => {
   const { title, content, categoryIds } = req.body;
@@ -16,23 +16,35 @@ const create = async (req, res) => {
   const updated = sequelize.fn('NOW');
 
   const newBlogPost = await BlogPost.create({ title, content, userId: id, published, updated });
-  
-//   await newBlogPost.addCategories(categoryIds); // addCategories é uma função criada pelo sequelize no resultado da criação de um novo blogPost.
 
+  // adiciona categoryIds a tabela de junção
+  
+  await newBlogPost.addCategories(categoryIds); // addCategories é uma função criada pelo sequelize no resultado da criação de um novo blogPost.
+
+// outra opção para fazer essa operação se a função dada pelo sequelize não funcionar.
 //   await Promise.all(categoryIds.map((category) => PostCategory.create({ categoryId: category, postId: newBlogPost.id })));
 
   return res.status(201).json(newBlogPost);
 };
 
-// const findAll = async (req, res) => {
-//   const categoriesList = await BlogPost.findAll({ order: [
-//     ['id', 'ASC'],
-//   ] });
+const findAll = async (req, res) => {
+  const categoriesList = await BlogPost.findAll({
+      attributes: { exclude: ['UserId'] },
+      include: [{
+        model: User,
+        as: 'user',
+        attributes: ['id', 'displayName', 'email', 'image'],
+      }, {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+      }],
+  });
 
-//   return res.status(200).json(categoriesList);
-// };
+  return res.status(200).json(categoriesList);
+};
 
 module.exports = {
   create,
-//   findAll,
+  findAll,
 };
