@@ -10,6 +10,15 @@ const create = async (req, res) => {
   return res.status(201).json(newCategory);
 };
 
+const findAll = async (req, res) => {
+  const categoriesList = await Category.findAll({ order: [
+    ['id', 'ASC'],
+  ] });
+
+  return res.status(200).json(categoriesList);
+};
+
 module.exports = {
   create,
+  findAll,
 };

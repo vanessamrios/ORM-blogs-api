@@ -1,5 +1,5 @@
 const express = require('express');
-const { create } = require('../controllers/categoriesController');
+const { create, findAll } = require('../controllers/categoriesController');
 const { validateName } = require('../middlewares/categoriesMiddleware');
 
 const authMiddleware = require('../middlewares/authMiddleware');
@@ -13,11 +13,11 @@ router.post(
   create,
 );
 
-// router.get(
-//   '/',
-//   authMiddleware,
-//   findAll,
-// );
+router.get(
+  '/',
+  authMiddleware,
+  findAll,
+);
 
 // router.get(
 //   '/:id',
